@@ -5,7 +5,7 @@ from transformers import TrainingArguments, Trainer
 	
 def main():
 	learning_rate = 1e-3
-	batch_size = 8
+	batch_size = 16
 	num_epochs = 16
 
 	dataset = load_dataset("rotten_tomatoes")
