@@ -5,7 +5,7 @@ from transformers import TrainingArguments, Trainer
 	
 def main():
 	learning_rate = 1e-3
-	batch_size = 16
+	batch_size = 32
 	num_epochs = 16
 
 	dataset = load_dataset("rotten_tomatoes")
@@ -25,8 +25,8 @@ def main():
 		per_device_train_batch_size=batch_size,
 		per_device_eval_batch_size=batch_size,
 		num_train_epochs=num_epochs,
-        save_strategy="no"
-		)
+		save_strategy="no"
+	)
 
 	trainer = Trainer(
 		model=model,
