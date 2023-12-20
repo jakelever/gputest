@@ -1,12 +1,15 @@
 
+import argparse
 from datasets import load_dataset
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from transformers import TrainingArguments, Trainer
 	
 def main():
-	learning_rate = 1e-3
-	batch_size = 8
-	num_epochs = 16
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--learning_rate',required=True,type=float)
+	parser.add_argument('--batch_size',required=True,type=int)
+	parser.add_argument('--num_epochs',required=True,type=int)
+	args = parser.parse_args()
 
 	dataset = load_dataset("rotten_tomatoes")
 
@@ -21,12 +24,12 @@ def main():
 
 	training_args = TrainingArguments(
 		output_dir="test_trainer",
-		learning_rate=learning_rate,
-		per_device_train_batch_size=batch_size,
-		per_device_eval_batch_size=batch_size,
-		num_train_epochs=num_epochs,
-        save_strategy="no"
-		)
+		learning_rate=args.learning_rate,
+		per_device_train_batch_size=args.batch_size,
+		per_device_eval_batch_size=args.batch_size,
+		num_train_epochs=args.num_epochs,
+		save_strategy="no"
+	)
 
 	trainer = Trainer(
 		model=model,
