@@ -12,14 +12,8 @@ def main():
 	tokenizer = AutoTokenizer.from_pretrained(model_name)
 	tokenizer.add_tokens(["[E1]", "[/E1]", "[E2]", "[/E2]"])
 
-	dataset = load_dataset("jakelever/debug_drugprot")
+	dataset = load_dataset("jakelever/debug_drugprot2")
 	
-	# Code to replace token_type_ids with zeros
-	def replaceTokenTypeIds(x):
-		x['token_type_ids'] = [ 0 for _ in x['input_ids'] ]
-		return x
-	dataset = dataset.map(replaceTokenTypeIds)
-
 	data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 	
 	reltypes = ['ACTIVATOR', 'AGONIST', 'AGONIST-ACTIVATOR', 'AGONIST-INHIBITOR', 'ANTAGONIST', 'DIRECT-REGULATOR', 'INDIRECT-DOWNREGULATOR', 'INDIRECT-UPREGULATOR', 'INHIBITOR', 'PART-OF', 'PRODUCT-OF', 'SUBSTRATE', 'SUBSTRATE_PRODUCT-OF']
