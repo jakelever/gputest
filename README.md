@@ -10,3 +10,11 @@ This needs Python along with a few HuggingFace libraries as below
 pip install transformers[torch] datasets evaluate
 ```
 
+## Docker image creation
+
+The Docker image was created using the Dockerfile and these commands to push it to DockerHub
+
+```
+docker build -t jakelever/gputest .
+docker push jakelever/gputest
+```
